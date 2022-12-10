@@ -1,0 +1,73 @@
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+<nav class="nav flex-column nav-pills " role="tablist" aria-orientation="vertical">
+
+    <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical"
+         [appViewPermission]="perms.menu.repo.section">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">{{'sidemenu.repo.section'|translate}}</a>
+
+        <a class="nav-link my-0 py-0" id="repo-search" routerLink="/repo/search" routerLinkActive="active" data-toggle="pill"
+           [appViewPermission]="perms.menu.repo.search" role="tab" aria-controls="v-pills-search" aria-selected="true">{{'sidemenu.repo.search'|translate}}</a>
+
+        <a class="nav-link my-0 py-0" id="repo-browse" routerLink="/repo/browse" routerLinkActive="active" data-toggle="pill"
+           [appViewPermission]="perms.menu.repo.browse" role="tab" aria-controls="v-pills-browse" aria-selected="false">{{'sidemenu.repo.browse'|translate}}</a>
+
+        <a class="nav-link my-0 py-0" id="repo-upload" routerLink="/repo/upload" routerLinkActive="active" data-toggle="pill"
+           role="tab" aria-controls="v-pills-browse" aria-selected="false"
+           [appViewPermission]="perms.menu.repo.upload">{{'sidemenu.repo.upload'|translate}}</a>
+    </div>
+    <div class="nav flex-column nav-pills" aria-orientation="vertical" role="tablist"
+         [appViewPermission]="perms.menu.admin.section">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
+           role="tab" aria-controls="v-pills-home" aria-selected="false">{{'sidemenu.admin.section'|translate}}</a>
+        <a class="nav-link my-0 py-0" id="admin-repos" routerLink="/admin/repositories" routerLinkActive="active" data-toggle="pill"
+           [appViewPermission]="perms.menu.admin.config" role="tab" aria-controls="v-pills-browse" aria-selected="false">{{'sidemenu.admin.repositories'|translate}}</a>
+        <a class="nav-link my-0 py-0" id="admin-groups" routerLink="/admin/repositorygroups" routerLinkActive="active" data-toggle="pill"
+           [appViewPermission]="perms.menu.admin.config" role="tab" aria-controls="v-pills-browse" aria-selected="false">{{'sidemenu.admin.repositorygroups'|translate}}</a>
+        <a class="nav-link my-0 py-0" id="admin-proxy-conn" routerLink="/admin/proxy" routerLinkActive="active" data-toggle="pill"
+           [appViewPermission]="perms.menu.admin.config" role="tab" aria-controls="v-pills-browse" aria-selected="false">{{'sidemenu.admin.proxy'|translate}}</a>
+        <a class="nav-link my-0 py-0" id="admin-network-proxy" routerLink="/admin/network" routerLinkActive="active" data-toggle="pill"
+           [appViewPermission]="perms.menu.admin.config" role="tab" aria-controls="v-pills-browse" aria-selected="false">{{'sidemenu.admin.network'|translate}}</a>
+        <a class="nav-link my-0 py-0" id="admin-repo-scan" routerLink="/admin/scanning" routerLinkActive="active" data-toggle="pill"
+           [appViewPermission]="perms.menu.admin.config" role="tab" aria-controls="v-pills-browse" aria-selected="false">{{'sidemenu.admin.scanning'|translate}}</a>
+        <a class="nav-link my-0 py-0" id="admin-runtime-configuration" routerLink="/admin/runtimeconfig" routerLinkActive="active" data-toggle="pill"
+           [appViewPermission]="perms.menu.admin.config" role="tab" aria-controls="v-pills-browse" aria-selected="false">{{'sidemenu.admin.runtimeconfig'|translate}}</a>
+        <a class="nav-link my-0 py-0" id="admin-status" routerLink="/admin/status" routerLinkActive="active" data-toggle="pill"
+           [appViewPermission]="perms.menu.admin.status" role="tab" aria-controls="v-pills-browse" aria-selected="false">{{'sidemenu.admin.status'|translate}}</a>
+        <a class="nav-link my-0 py-0" id="admin-reports" routerLink="/admin/reports" routerLinkActive="active" data-toggle="pill"
+           [appViewPermission]="perms.menu.admin.reports" role="tab" aria-controls="v-pills-browse" aria-selected="false">{{'sidemenu.admin.reports'|translate}}</a>
+    </div>
+    <div class="nav flex-column nav-pills" [appViewPermission]="perms.menu.security.section">
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" data-toggle="pill"
+           role="tab" aria-controls="v-pills-home" aria-selected="false">{{'sidemenu.security.section'|translate}}</a>
+        <a class="nav-link my-0 py-0" id="users-manage" routerLink="/security/users" routerLinkActive="active" data-toggle="pill"
+           role="tab" aria-controls="v-pills-browse" aria-selected="false">{{'sidemenu.security.users'|translate}}</a>
+        <a class="nav-link my-0 py-0" id="users-roles" routerLink="/security/roles" routerLinkActive="active" data-toggle="pill"
+           role="tab" aria-controls="v-pills-browse" aria-selected="false">{{'sidemenu.security.roles'|translate}}</a>
+        <a class="nav-link my-0 py-0" id="users-configuration" routerLink="/security/config" routerLinkActive="active" data-toggle="pill"
+           role="tab" aria-controls="v-pills-browse" aria-selected="false">{{'sidemenu.security.config'|translate}}</a>
+    </div>
+    <div class="nav flex-column nav-pills" >
+        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true" data-toggle="pill"
+           role="tab" aria-controls="v-pills-home" aria-selected="false">{{'sidemenu.doc.section'|translate}}</a>
+        <a class="nav-link my-0 py-0" id="doc-userdoc" routerLink="/doc/userguide" routerLinkActive="active" data-toggle="pill"
+           role="tab" aria-controls="v-pills-browse" aria-selected="false">{{'sidemenu.doc.userguide'|translate}}</a>
+        <a class="nav-link my-0 py-0" id="doc-rest-api" routerLink="/user/restapi" routerLinkActive="active" data-toggle="pill"
+           role="tab" aria-controls="v-pills-browse" aria-selected="false">{{'sidemenu.doc.restapi'|translate}}</a>
+    </div>
+</nav>

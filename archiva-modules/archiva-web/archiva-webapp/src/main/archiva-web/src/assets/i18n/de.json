@@ -1,0 +1,21 @@
+{
+  "login": {
+    "title": "Anmelden bei Archiva",
+    "password": "Passwort",
+    "userid": "User Id",
+    "submit": "Anmelden"
+  },
+  "modal" : {
+    "close":"Schließen"
+  },
+  "menu": {
+    "home": "Home",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "about": "Über",
+    "contact": "Kontakt"
+  },
+  "api" : {
+    "rb.auth.invalid_credentials": "Anmeldedaten ungültig"
+  }
+}

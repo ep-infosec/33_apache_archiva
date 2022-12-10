@@ -1,0 +1,56 @@
+<!--
+  ~ Licensed to the Apache Software Foundation (ASF) under one
+  ~ or more contributor license agreements.  See the NOTICE file
+  ~ distributed with this work for additional information
+  ~ regarding copyright ownership.  The ASF licenses this file
+  ~ to you under the Apache License, Version 2.0 (the
+  ~ "License"); you may not use this file except in compliance
+  ~ with the License.  You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~ Unless required by applicable law or agreed to in writing,
+  ~ software distributed under the License is distributed on an
+  ~ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  ~ KIND, either express or implied.  See the License for the
+  ~ specific language governing permissions and limitations
+  ~ under the License.
+  -->
+
+<app-paginated-entities [service]="service" pageSize="10" [(sortField)]="sortField" [(sortOrder)]="sortOrder"
+                        #parent>
+    <ng-container *ngIf="parent.items$ |async as roleItemLoader" >
+        <ng-template [ngIf]="roleItemLoader.loading" #spinner let-modal>
+            <div class="fixed-top d-flex justify-content-center mt-5 pt-5">
+                <div class="spinner-border text-info mt-5" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </ng-template>
+    </ng-container>
+    <ng-container *ngIf="parent.items$ |stripLoading|async as propertyItem" >
+        <table class="table table-striped table-bordered">
+            <thead class="thead-light">
+            <tr sorted [sortFieldEmitter]="parent.sortFieldChange" [sortOrderEmitter]="parent.sortOrderChange"
+                [toggleObserver]="parent">
+                <app-th-sorted [fieldArray]="['key']" contentText="security.config.properties.attributes.key"></app-th-sorted>
+                <app-th-sorted [fieldArray]="['value']" contentText="security.config.properties.attributes.value"></app-th-sorted>
+                <th>{{'headers.action' |translate}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let propertyEntry  of propertyItem.data" >
+                <td class="align-middle">{{propertyEntry.key}}</td>
+                <td class="align-middle" *ngIf="isEdit(propertyEntry.key)"><input class="form-control" type="text" [(ngModel)]="propertyValue"></td>
+                <td class="align-middle" *ngIf="!isEdit(propertyEntry.key)">{{propertyEntry.value}}</td>
+                <td class="align-middle" >
+                    <a [routerLink]="" (click)="toggleEditProperty(propertyEntry)"
+                       [attr.title]="'security.config.properties.edit' |translate"><span class="fas fa-edit"></span></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </ng-container>
+
+</app-paginated-entities>
+
+

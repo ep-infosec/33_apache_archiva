@@ -1,0 +1,143 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+/*
+ * JCR OAK does not support same name siblings. Which means we have to
+ * setup unique keys for list entries.
+ */
+<archiva = 'http://archiva.apache.org/jcr'>
+[archiva:base] abstract mixin
+  - id (string)
+  - jcr:lastModified (date)
+
+[archiva:repository] > archiva:base
+ + content (archiva:content) primary
+ + facets (nt:hierarchyNode)
+
+[archiva:content] > archiva:base
+ + * (archiva:folder)
+
+/*
+ * Namespaces and projects can have the same path, so we add the generic folder
+ * type as primary type. Namespace and project nodes are mixin types.
+ */
+[archiva:folder] > archiva:base
+ + * (archiva:folder)
+
+[archiva:namespace] > archiva:base mixin
+ - namespace (string)
+ + * (archiva:namespace)
+ + * (archiva:project)
+
+[archiva:project] > archiva:base mixin
+ - name (string)
+ + * (archiva:projectVersion)
+
+[archiva:meta_scm] mixin
+  - scm.connection (string)
+  - scm.developerConnection (string)
+  - scm.url (uri)
+
+[archiva:meta_ci] mixin
+  - ci.system (string)
+  - ci.url (uri)
+
+[archiva:meta_issue] mixin
+ - issue.system (string)
+ - issue.url (uri)
+
+[archiva:meta_organization] mixin
+ - org.name (string)
+ - org.url (uri)
+
+[archiva:license] > archiva:base
+ - index (long)
+ - name (string)
+ - url (uri)
+
+[archiva:mailinglist] > archiva:base
+ - index (long)
+ - name (string)
+ - archive (string)
+ - post (string)
+ - unsubscribe (string)
+ - subscribe (string)
+ - otherArchives (string)
+
+[archiva:dependency] > archiva:base
+ - namespace (string)
+ - projectId (string)
+ - version (string)
+ - artifactId (string)
+ - type (string)
+ - classifier (string)
+ - scope (string)
+ - systemPath (string)
+ - optional (boolean)
+ - link (path)
+
+[archiva:dependencies] > nt:hierarchyNode
+ + * (archiva:dependency)
+
+[archiva:checksums] > nt:hierarchyNode
+ - id (string)
+ + * (archiva:checksum)
+
+[archiva:checksum]
+ - type (string)
+ - value (string)
+
+[archiva:mailinglists] > nt:hierarchyNode
+ + * (archiva:mailinglist)
+
+[archiva:licenses] > nt:hierarchyNode
+ + * (archiva:license)
+
+
+[archiva:projectVersion] > archiva:base, archiva:meta_scm, archiva:meta_ci, archiva:meta_issue, archiva:meta_organization
+ - name (string)
+ - description (string)
+ - url (uri)
+ - incomplete (boolean)
+ + * (archiva:artifact)
+ + licenses (archiva:licenses)
+ + mailinglists (archiva:mailinglists)
+ + dependencies (archiva:dependencies)
+ + * (archiva:facet)
+
+
+
+[archiva:artifact] > archiva:base
+ - whenGathered (date)
+ - size (long)
+ - version (string)
+ + checksums (archiva:checksums)
+ + * (archiva:facet)
+
+[archiva:facets] > nt:hierarchyNode
+ + * (archiva:facetIdContainer)
+
+[archiva:facetIdContainer] > archiva:base
+ + * (archiva:facet)
+
+[archiva:facet] > archiva:base
+ - archiva:facetId (string)
+ - archiva:name (string)
+ - * (string)
+ + * (archiva:facet)
